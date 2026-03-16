@@ -29,17 +29,16 @@ with st.sidebar:
                     st.session_state.vectorstore = vectorstore
                     st.session_state.current_pdf = uploaded_file.name
                     st.session_state.history     = [] 
-                    # st.success("✅ PDF Ready!")
+                   
                 else:
                     st.error(f"❌ Error: {msg}")
-        # else:
-        #     st.info("✅ Same PDF already loaded!")
+       
 
     # Status
     if "vectorstore" in st.session_state and st.session_state.vectorstore is not None:
         st.success(f"Loaded: {st.session_state.get('current_pdf', '')}")
     else:
-        st.warning("⚠️ Upload PDF then click Process")
+        st.warning("Upload PDF then click Process")
 
 # questions input
 question = st.text_input(
@@ -49,7 +48,6 @@ question = st.text_input(
 
 ask_button = st.button("🔍 Get Answer")
 
-# ─── ANSWER ───────────────────────────────────
 if ask_button and question:
     if "vectorstore" not in st.session_state or st.session_state.vectorstore is None:
         st.error("⚠️ Please upload PDF and click Process first!")
@@ -73,7 +71,7 @@ if ask_button and question:
 # history
 if "history" in st.session_state and st.session_state.history:
     st.markdown("---")
-    st.markdown("### 📝 Previous Questions")
+    st.markdown("Previous Questions")
     for item in reversed(st.session_state.history):
         with st.expander(f"Q: {item['q'][:60]}..."):
             st.markdown(f"**Question:** {item['q']}")
