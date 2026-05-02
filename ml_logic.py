@@ -1,4 +1,3 @@
-
 import os
 from dotenv import load_dotenv
 from langchain_community.document_loaders import PyPDFLoader
@@ -7,7 +6,7 @@ from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_groq import ChatGroq
 
-# ✅ .env se API key load karo
+
 load_dotenv()
 
 # Load PDF
@@ -38,7 +37,7 @@ def create_vectorstore(chunks, embeddings):
     vectorstore = FAISS.from_documents(chunks, embeddings)
     return vectorstore
 
-# ✅ LLM — ab .env se key aayegi
+
 def setup_llm():
     llm = ChatGroq(
         api_key=os.getenv("GROQ_API_KEY"),  # ← .env se aayega
